@@ -4,10 +4,11 @@ import (
 	"testing"
 	"github.com/modern-go/reflect2"
 	"errors"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
+	"github.com/modern-go/test"
+
 	"unsafe"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test/must"
+	"context"
 )
 
 func Test_slice_iface(t *testing.T) {
@@ -29,7 +30,7 @@ func Test_slice_iface(t *testing.T) {
 		valType.SetIndex(&obj, 1, pError("world"))
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := []error{errors.New("hello"), nil}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		elem0 := errors.New("hi")
@@ -46,7 +47,7 @@ func Test_slice_iface(t *testing.T) {
 			valType.GetIndex(&obj, 1),
 		}
 	}))
-	t.Run("UnsafeGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeGetIndex", test.Case(func(ctx context.Context) {
 		obj := []error{errors.New("hello"), nil}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		elem0 := valType.UnsafeGetIndex(reflect2.PtrOf(obj), 0)
@@ -63,7 +64,7 @@ func Test_slice_iface(t *testing.T) {
 		valType.Append(ptr, pError("4"))
 		return ptr
 	}))
-	t.Run("UnsafeAppend", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeAppend", test.Case(func(ctx context.Context) {
 		obj := make([]error, 2, 3)
 		obj[0] = errors.New("1")
 		obj[1] = errors.New("2")

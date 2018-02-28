@@ -3,10 +3,11 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test/must"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
+	"github.com/modern-go/test/must"
+	"github.com/modern-go/test"
+
 	"unsafe"
+	"context"
 )
 
 func Test_map_key_ptr(t *testing.T) {
@@ -22,7 +23,7 @@ func Test_map_key_ptr(t *testing.T) {
 		//valType.SetIndex(obj, nil, 9)
 		return obj[pInt(2)]
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := map[*int]int{}
 		valType := reflect2.TypeOf(obj).(reflect2.MapType)
 		v := pInt(2)

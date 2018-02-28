@@ -3,10 +3,11 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
+	"github.com/modern-go/test"
+
 	"unsafe"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test/must"
+	"context"
 )
 
 func Test_slice_ptr(t *testing.T) {
@@ -27,7 +28,7 @@ func Test_slice_ptr(t *testing.T) {
 		valType.SetIndex(obj, 1, pInt(3))
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := []*int{pInt(1), nil}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		valType.UnsafeSetIndex(reflect2.PtrOf(obj), 0, unsafe.Pointer(pInt(2)))

@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test/must"
 )
 
 type intError int

@@ -3,11 +3,12 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test/must"
-	"github.com/v2pro/plz/countlog"
-	"github.com/v2pro/plz/test"
+	"github.com/modern-go/test/must"
+
+	"github.com/modern-go/test"
 	"unsafe"
 	"reflect"
+	"context"
 )
 
 func Test_map(t *testing.T) {
@@ -35,13 +36,13 @@ func Test_map(t *testing.T) {
 		m[3] = 9
 		return m
 	}))
-	t.Run("UnsafeMakeMap", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeMakeMap", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(map[int]int{}).(reflect2.MapType)
 		m := *(*map[int]int)(valType.UnsafeMakeMap(0))
 		m[2] = 4
 		m[3] = 9
 	}))
-	t.Run("PackEFace", test.Case(func(ctx *countlog.Context) {
+	t.Run("PackEFace", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(map[int]int{}).(reflect2.MapType)
 		m := valType.UnsafeMakeMap(0)
 		must.Equal(&map[int]int{}, valType.PackEFace(unsafe.Pointer(m)))
@@ -58,7 +59,7 @@ func Test_map(t *testing.T) {
 		must.Equal(4, obj[2])
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := map[int]int{}
 		valType := reflect2.TypeOf(obj).(reflect2.MapType)
 		valType.UnsafeSetIndex(unsafe.Pointer(&obj), reflect2.PtrOf(2), reflect2.PtrOf(4))
@@ -72,7 +73,7 @@ func Test_map(t *testing.T) {
 			valType.GetIndex(&obj, pInt(0)).(*int),
 		}
 	}))
-	t.Run("UnsafeGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeGetIndex", test.Case(func(ctx context.Context) {
 		obj := map[int]int{3: 9, 2: 4}
 		valType := reflect2.TypeOf(obj).(reflect2.MapType)
 		elem := valType.UnsafeGetIndex(unsafe.Pointer(&obj), reflect2.PtrOf(3))
@@ -87,7 +88,7 @@ func Test_map(t *testing.T) {
 		must.Pass(!iter.HasNext(), "api", api)
 		return []interface{}{key1, elem1}
 	}))
-	t.Run("UnsafeIterate", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeIterate", test.Case(func(ctx context.Context) {
 		obj := map[int]int{2: 4}
 		valType := reflect2.TypeOf(obj).(reflect2.MapType)
 		iter := valType.UnsafeIterate(unsafe.Pointer(&obj))

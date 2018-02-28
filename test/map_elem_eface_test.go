@@ -3,9 +3,10 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test/must"
-	"github.com/v2pro/plz/countlog"
-	"github.com/v2pro/plz/test"
+	"github.com/modern-go/test/must"
+
+	"github.com/modern-go/test"
+	"context"
 )
 
 func Test_map_elem_eface(t *testing.T) {
@@ -25,7 +26,7 @@ func Test_map_elem_eface(t *testing.T) {
 			valType.GetIndex(obj, 0),
 		}
 	}))
-	t.Run("TryGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("TryGetIndex", test.Case(func(ctx context.Context) {
 		obj := map[int]interface{}{3: 9, 2: nil}
 		valType := reflect2.TypeOf(obj).(reflect2.MapType)
 		elem, found := valType.TryGetIndex(obj, 3)

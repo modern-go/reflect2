@@ -3,10 +3,11 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
+	"github.com/modern-go/test"
+
 	"unsafe"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test/must"
+	"context"
 )
 
 func Test_struct(t *testing.T) {
@@ -24,12 +25,12 @@ func Test_struct(t *testing.T) {
 		obj.(*TestObject).Field2 = 100
 		return obj
 	}))
-	t.Run("PackEFace", test.Case(func(ctx *countlog.Context) {
+	t.Run("PackEFace", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(TestObject{})
 		ptr := valType.UnsafeNew()
 		must.Equal(&TestObject{}, valType.PackEFace(ptr))
 	}))
-	t.Run("Indirect", test.Case(func(ctx *countlog.Context) {
+	t.Run("Indirect", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(TestObject{})
 		must.Equal(TestObject{}, valType.Indirect(&TestObject{}))
 	}))
@@ -40,7 +41,7 @@ func Test_struct(t *testing.T) {
 		field1.Set(&obj, pInt(100))
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(TestObject{}).(reflect2.StructType)
 		field1 := valType.FieldByName("Field1")
 		obj := TestObject{}
@@ -53,7 +54,7 @@ func Test_struct(t *testing.T) {
 		field1 := valType.FieldByName("Field1")
 		return field1.Get(&obj)
 	}))
-	t.Run("UnsafeGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeGetIndex", test.Case(func(ctx context.Context) {
 		obj := TestObject{Field1: 100}
 		valType := reflect2.TypeOf(obj).(reflect2.StructType)
 		field1 := valType.FieldByName("Field1")

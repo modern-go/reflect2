@@ -3,12 +3,13 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test"
+
+	"github.com/modern-go/test/must"
 	"unsafe"
-	"github.com/v2pro/plz/test/should"
+	"github.com/modern-go/test/should"
 	"fmt"
+	"context"
 )
 
 func Test_slice_eface(t *testing.T) {
@@ -28,7 +29,7 @@ func Test_slice_eface(t *testing.T) {
 		valType.SetIndex(obj, 1, &elem1)
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := []interface{}{1, 2}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		var elem0 interface{} = 100
@@ -46,7 +47,7 @@ func Test_slice_eface(t *testing.T) {
 			valType.GetIndex(obj, 1),
 		}
 	}))
-	t.Run("UnsafeGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeGetIndex", test.Case(func(ctx context.Context) {
 		obj := []interface{}{1, nil}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		elem0 := valType.UnsafeGetIndex(reflect2.PtrOf(obj), 0)
@@ -62,7 +63,7 @@ func Test_slice_eface(t *testing.T) {
 		valType.Append(&obj, 4)
 		return obj
 	}))
-	t.Run("UnsafeAppend", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeAppend", test.Case(func(ctx context.Context) {
 		obj := make([]interface{}, 2, 3)
 		obj[0] = 1
 		obj[1] = 2

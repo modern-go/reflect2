@@ -3,10 +3,10 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
+	"github.com/modern-go/test"
 	"unsafe"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test/must"
+	"context"
 )
 
 func Test_int(t *testing.T) {
@@ -16,17 +16,17 @@ func Test_int(t *testing.T) {
 		*obj.(*int) = 100
 		return obj
 	}))
-	t.Run("PackEFace", test.Case(func(ctx *countlog.Context) {
+	t.Run("PackEFace", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(1)
 		hundred := 100
 		must.Equal(&hundred, valType.PackEFace(unsafe.Pointer(&hundred)))
 	}))
-	t.Run("Indirect", test.Case(func(ctx *countlog.Context) {
+	t.Run("Indirect", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(1)
 		hundred := 100
 		must.Equal(100, valType.Indirect(&hundred))
 	}))
-	t.Run("Indirect", test.Case(func(ctx *countlog.Context) {
+	t.Run("Indirect", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf(1)
 		hundred := 100
 		must.Equal(100, valType.UnsafeIndirect(unsafe.Pointer(&hundred)))

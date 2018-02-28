@@ -3,9 +3,10 @@ package test
 import (
 	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/v2pro/plz/test"
-	"github.com/v2pro/plz/countlog"
-	"github.com/v2pro/plz/test/must"
+	"github.com/modern-go/test"
+
+	"github.com/modern-go/test/must"
+	"context"
 )
 
 func Test_slice(t *testing.T) {
@@ -48,7 +49,7 @@ func Test_slice(t *testing.T) {
 		obj[4] = 20
 		return obj
 	}))
-	t.Run("UnsafeMakeSlice", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeMakeSlice", test.Case(func(ctx context.Context) {
 		valType := reflect2.TypeOf([]int{}).(reflect2.SliceType)
 		obj := valType.UnsafeMakeSlice(5, 10)
 		must.Equal(&[]int{0, 0, 0, 0, 0}, valType.PackEFace(obj))
@@ -60,7 +61,7 @@ func Test_slice(t *testing.T) {
 		valType.SetIndex(&obj, 1, pInt(20))
 		return obj
 	}))
-	t.Run("UnsafeSetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeSetIndex", test.Case(func(ctx context.Context) {
 		obj := []int{1, 2}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		valType.UnsafeSetIndex(reflect2.PtrOf(obj), 0, reflect2.PtrOf(100))
@@ -74,7 +75,7 @@ func Test_slice(t *testing.T) {
 			valType.GetIndex(&obj, 1).(*int),
 		}
 	}))
-	t.Run("UnsafeGetIndex", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeGetIndex", test.Case(func(ctx context.Context) {
 		obj := []int{1, 2}
 		valType := reflect2.TypeOf(obj).(reflect2.SliceType)
 		elem0 := valType.UnsafeGetIndex(reflect2.PtrOf(obj), 0)
@@ -93,7 +94,7 @@ func Test_slice(t *testing.T) {
 		valType.Append(ptr, pInt(4))
 		return ptr
 	}))
-	t.Run("UnsafeAppend", test.Case(func(ctx *countlog.Context) {
+	t.Run("UnsafeAppend", test.Case(func(ctx context.Context) {
 		obj := make([]int, 2, 3)
 		obj[0] = 1
 		obj[1] = 2
