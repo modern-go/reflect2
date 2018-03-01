@@ -213,6 +213,9 @@ func TypeOfPtr(obj interface{}) PtrType {
 }
 
 func Type2(type1 reflect.Type) Type {
+	if type1 == nil {
+		return nil
+	}
 	return ConfigUnsafe.Type2(type1)
 }
 

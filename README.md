@@ -16,3 +16,37 @@ reflect api that avoids runtime reflect.Value cost
 [json-iterator](https://github.com/json-iterator/go) use this package to save runtime dispatching cost.
 This package is designed for low level libraries to optimize reflection performance.
 General application should still use reflect standard library.
+
+# reflect2.TypeByName
+
+```go
+// given package is github.com/your/awesome-package
+type MyStruct struct {
+	// ...
+}
+
+// will return the type
+reflect2.TypeByName("awesome-package.MyStruct")
+// however, if the type has not been used
+// it will be eliminated by compiler, so we can not get it in runtime
+```
+
+# reflect2 get/set interface{}
+
+```go
+valType := reflect2.TypeOf(1)
+i := 1
+j := 10
+valType.Set(&i, &j)
+// i will be 10
+```
+
+# reflect2 get/set unsafe.Pointer
+
+```go
+valType := reflect2.TypeOf(1)
+i := 1
+j := 10
+valType.UnsafeSet(unsfae.Pointer(&i), unsafe.Pointer(&j))
+// i will be 10
+```
