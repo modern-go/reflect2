@@ -41,12 +41,31 @@ valType.Set(&i, &j)
 // i will be 10
 ```
 
+to get set `type`, always use its pointer `*type`
+
 # reflect2 get/set unsafe.Pointer
 
 ```go
 valType := reflect2.TypeOf(1)
 i := 1
 j := 10
-valType.UnsafeSet(unsfae.Pointer(&i), unsafe.Pointer(&j))
+valType.UnsafeSet(unsafe.Pointer(&i), unsafe.Pointer(&j))
 // i will be 10
 ```
+
+to get set `type`, always use its pointer `*type`
+
+# benchmark
+
+Benchmark is not necessary for this package. It does nothing actually.
+As it is just a thin wrapper to make go runtime public. 
+Both `reflect2` and `reflect` call same function 
+provided by `runtime` package exposed by go language.
+
+# unsafe safety
+
+Instead of casting `[]byte` to `sliceHeader` in your application using unsafe.
+We can use reflect2 instead. This way, if `sliceHeader` changes in the future,
+only reflect2 need to be upgraded.
+
+reflect2 tries its best to keep the implementation same as reflect (by testing).
