@@ -11,6 +11,7 @@ reflect api that avoids runtime reflect.Value cost
 
 * reflect get/set interface{}, with type checking
 * reflect get/set unsafe.Pointer, without type checking
+* `reflect2.TypeByName` works like `Class.forName` found in java
 
 [json-iterator](https://github.com/json-iterator/go) use this package to save runtime dispatching cost.
 This package is designed for low level libraries to optimize reflection performance.
