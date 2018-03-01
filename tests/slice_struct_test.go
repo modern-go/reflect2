@@ -16,8 +16,8 @@ func Test_slice_struct(t *testing.T) {
 		}
 		obj := []TestObject{{}, {}}
 		valType := api.TypeOf(obj).(reflect2.SliceType)
-		valType.SetIndex(obj, 0, &TestObject{1, 3})
-		valType.SetIndex(obj, 1, &TestObject{2, 4})
+		valType.SetIndex(&obj, 0, &TestObject{1, 3})
+		valType.SetIndex(&obj, 1, &TestObject{2, 4})
 		return obj
 	}))
 	t.Run("SetIndex single ptr struct", testOp(func(api reflect2.API) interface{} {
@@ -26,8 +26,8 @@ func Test_slice_struct(t *testing.T) {
 		}
 		obj := []TestObject{{}, {}}
 		valType := api.TypeOf(obj).(reflect2.SliceType)
-		valType.SetIndex(obj, 0, &TestObject{pInt(1)})
-		valType.SetIndex(obj, 1, &TestObject{pInt(2)})
+		valType.SetIndex(&obj, 0, &TestObject{pInt(1)})
+		valType.SetIndex(&obj, 1, &TestObject{pInt(2)})
 		return obj
 	}))
 	t.Run("SetIndex single chan struct", testOp(func(api reflect2.API) interface{} {
@@ -36,8 +36,8 @@ func Test_slice_struct(t *testing.T) {
 		}
 		obj := []TestObject{{}, {}}
 		valType := api.TypeOf(obj).(reflect2.SliceType)
-		valType.SetIndex(obj, 0, TestObject{})
-		valType.SetIndex(obj, 1, TestObject{})
+		valType.SetIndex(&obj, 0, &TestObject{})
+		valType.SetIndex(&obj, 1, &TestObject{})
 		return obj
 	}))
 	t.Run("SetIndex single func struct", testOp(func(api reflect2.API) interface{} {
@@ -46,8 +46,8 @@ func Test_slice_struct(t *testing.T) {
 		}
 		obj := []TestObject{{}, {}}
 		valType := api.TypeOf(obj).(reflect2.SliceType)
-		valType.SetIndex(obj, 0, TestObject{})
-		valType.SetIndex(obj, 1, TestObject{})
+		valType.SetIndex(&obj, 0, &TestObject{})
+		valType.SetIndex(&obj, 1, &TestObject{})
 		return obj
 	}))
 }

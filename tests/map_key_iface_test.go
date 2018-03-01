@@ -13,14 +13,21 @@ func (err intError) Error() string {
 }
 
 func Test_map_iface_key(t *testing.T) {
+	var pInt = func(val int) *int {
+		return &val
+	}
 	t.Run("SetIndex", testOp(func(api reflect2.API) interface{} {
 		obj := map[error]int{}
 		valType := api.TypeOf(obj).(reflect2.MapType)
-		valType.SetIndex(obj, intError(2), 4)
-		valType.SetIndex(obj, intError(2), 9)
-		valType.SetIndex(obj, nil, 9)
+		key1 := error(intError(2))
+		valType.SetIndex(&obj, &key1, pInt(4))
+		key2 := error(intError(2))
+		valType.SetIndex(&obj, &key2, pInt(9))
+		key3 := error(nil)
+		valType.SetIndex(&obj, &key3, pInt(9))
 		must.Panic(func() {
-			valType.SetIndex(obj, "", 9)
+			key4 := ""
+			valType.SetIndex(&obj, &key4, pInt(9))
 		})
 		return obj
 	}))
@@ -28,17 +35,20 @@ func Test_map_iface_key(t *testing.T) {
 		obj := map[error]int{intError(3): 9, intError(2): 4}
 		valType := api.TypeOf(obj).(reflect2.MapType)
 		must.Panic(func() {
-			valType.GetIndex(obj, "")
+			key1 := ""
+			valType.GetIndex(obj, &key1)
 		})
+		key2 := error(intError(3))
+		key3 := error(nil)
 		return []interface{}{
-			valType.GetIndex(obj, intError(3)),
-			valType.GetIndex(obj, nil),
+			valType.GetIndex(&obj, &key2),
+			valType.GetIndex(&obj, &key3),
 		}
 	}))
 	t.Run("Iterate", testOp(func(api reflect2.API) interface{} {
 		obj := map[error]int{intError(2): 4}
 		valType := api.TypeOf(obj).(reflect2.MapType)
-		iter := valType.Iterate(obj)
+		iter := valType.Iterate(&obj)
 		must.Pass(iter.HasNext(), "api", api)
 		key1, elem1 := iter.Next()
 		must.Pass(!iter.HasNext(), "api", api)

@@ -9,8 +9,10 @@ func Test_slice_string(t *testing.T) {
 	t.Run("SetIndex", testOp(func(api reflect2.API) interface{} {
 		obj := []string{"hello", "world"}
 		valType := api.TypeOf(obj).(reflect2.SliceType)
-		valType.SetIndex(&obj, 0, "hi")
-		valType.SetIndex(&obj, 1, "there")
+		elem1 := "hi"
+		valType.SetIndex(&obj, 0, &elem1)
+		elem2 := "there"
+		valType.SetIndex(&obj, 1, &elem2)
 		return obj
 	}))
 }
