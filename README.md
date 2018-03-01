@@ -13,3 +13,5 @@ reflect api that avoids runtime reflect.Value cost
 * reflect get/set unsafe.Pointer, without type checking
 
 [json-iterator](https://github.com/json-iterator/go) use this package to save runtime dispatching cost.
+This package is designed for low level libraries to optimize reflection performance.
+General application should still use reflect standard library.
