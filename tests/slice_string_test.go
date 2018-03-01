@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
+	"testing"
 )
 
 func Test_slice_string(t *testing.T) {

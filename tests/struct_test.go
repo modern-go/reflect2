@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
 	"github.com/modern-go/test"
+	"testing"
 
-	"unsafe"
-	"github.com/modern-go/test/must"
 	"context"
+	"github.com/modern-go/test/must"
+	"unsafe"
 )
 
 func Test_struct(t *testing.T) {

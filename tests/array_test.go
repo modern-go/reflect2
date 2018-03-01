@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
+	"testing"
 )
 
 func Test_array(t *testing.T) {
@@ -30,7 +30,7 @@ func Test_array(t *testing.T) {
 	t.Run("GetIndex", testOp(func(api reflect2.API) interface{} {
 		obj := [2]int{1, 2}
 		valType := api.TypeOf(obj).(reflect2.ArrayType)
-		return []interface{} {
+		return []interface{}{
 			valType.GetIndex(&obj, 0),
 			valType.GetIndex(&obj, 1),
 		}

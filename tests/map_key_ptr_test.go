@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
-	"github.com/modern-go/test/must"
 	"github.com/modern-go/test"
+	"github.com/modern-go/test/must"
+	"testing"
 
-	"unsafe"
 	"context"
+	"unsafe"
 )
 
 func Test_map_key_ptr(t *testing.T) {

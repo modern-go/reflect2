@@ -1,8 +1,8 @@
 package test
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
+	"testing"
 )
 
 func Test_map(t *testing.T) {

@@ -3,10 +3,10 @@ package tests
 import (
 	"testing"
 
-	"github.com/modern-go/reflect2"
-	"github.com/modern-go/test/must"
-	"github.com/modern-go/test"
 	"context"
+	"github.com/modern-go/reflect2"
+	"github.com/modern-go/test"
+	"github.com/modern-go/test/must"
 )
 
 func Test_struct_ptr(t *testing.T) {

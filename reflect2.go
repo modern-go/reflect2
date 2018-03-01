@@ -1,9 +1,9 @@
 package reflect2
 
 import (
+	"github.com/modern-go/concurrent"
 	"reflect"
 	"unsafe"
-	"github.com/modern-go/concurrent"
 )
 
 type Type interface {
@@ -136,7 +136,7 @@ type frozenConfig struct {
 func (cfg Config) Froze() *frozenConfig {
 	return &frozenConfig{
 		useSafeImplementation: cfg.UseSafeImplementation,
-		cache:                 concurrent.NewMap(),
+		cache: concurrent.NewMap(),
 	}
 }
 

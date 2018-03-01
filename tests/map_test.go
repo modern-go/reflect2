@@ -1,14 +1,14 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
 	"github.com/modern-go/test/must"
+	"testing"
 
-	"github.com/modern-go/test"
-	"unsafe"
-	"reflect"
 	"context"
+	"github.com/modern-go/test"
+	"reflect"
+	"unsafe"
 )
 
 func Test_map(t *testing.T) {

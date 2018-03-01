@@ -1,10 +1,10 @@
 package reflect2
 
 import (
-	"unsafe"
 	"reflect"
 	"runtime"
 	"strings"
+	"unsafe"
 )
 
 // typelinks1 for 1.5 ~ 1.6

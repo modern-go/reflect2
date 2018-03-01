@@ -4,9 +4,9 @@ import (
 	"github.com/modern-go/reflect2"
 	"testing"
 
-	"github.com/modern-go/test/must"
-	"github.com/modern-go/test"
 	"context"
+	"github.com/modern-go/test"
+	"github.com/modern-go/test/must"
 )
 
 func testOp(f func(api reflect2.API) interface{}) func(t *testing.T) {

@@ -1,14 +1,14 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
 	"github.com/modern-go/test"
+	"testing"
 
-	"github.com/modern-go/test/must"
-	"unsafe"
-	"github.com/modern-go/test/should"
 	"context"
+	"github.com/modern-go/test/must"
+	"github.com/modern-go/test/should"
+	"unsafe"
 )
 
 func Test_slice_eface(t *testing.T) {

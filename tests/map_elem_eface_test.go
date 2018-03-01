@@ -1,12 +1,12 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
 	"github.com/modern-go/test/must"
+	"testing"
 
-	"github.com/modern-go/test"
 	"context"
+	"github.com/modern-go/test"
 )
 
 func Test_map_elem_eface(t *testing.T) {

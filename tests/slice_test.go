@@ -1,12 +1,12 @@
 package tests
 
 import (
-	"testing"
 	"github.com/modern-go/reflect2"
 	"github.com/modern-go/test"
+	"testing"
 
-	"github.com/modern-go/test/must"
 	"context"
+	"github.com/modern-go/test/must"
 )
 
 func Test_slice(t *testing.T) {
