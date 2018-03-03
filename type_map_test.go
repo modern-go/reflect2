@@ -14,4 +14,10 @@ func TestTypeByName(t *testing.T) {
 	if typByName != typByPtr {
 		t.Fail()
 	}
+	typByPkg := reflect2.TypeByPackageName(
+		"github.com/modern-go/reflect2_test",
+		"MyStruct")
+	if typByPkg != typByPtr {
+		t.Fail()
+	}
 }
