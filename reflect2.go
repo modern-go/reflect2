@@ -283,3 +283,13 @@ func NoEscape(p unsafe.Pointer) unsafe.Pointer {
 	x := uintptr(p)
 	return unsafe.Pointer(x ^ 0)
 }
+
+func UnsafeCastString(str string) []byte {
+	stringHeader := (*reflect.StringHeader)(unsafe.Pointer(&str))
+	sliceHeader := &reflect.SliceHeader{
+		Data: stringHeader.Data,
+		Cap: stringHeader.Len,
+		Len: stringHeader.Len,
+	}
+	return *(*[]byte)(unsafe.Pointer(sliceHeader))
+}
