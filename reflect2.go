@@ -1,8 +1,8 @@
 package reflect2
 
 import (
-	"github.com/modern-go/concurrent"
 	"reflect"
+	"sync"
 	"unsafe"
 )
 
@@ -130,13 +130,13 @@ var ConfigSafe = Config{UseSafeImplementation: true}.Froze()
 
 type frozenConfig struct {
 	useSafeImplementation bool
-	cache                 *concurrent.Map
+	cache                 *sync.Map
 }
 
 func (cfg Config) Froze() *frozenConfig {
 	return &frozenConfig{
 		useSafeImplementation: cfg.UseSafeImplementation,
-		cache: concurrent.NewMap(),
+		cache:                 &sync.Map{},
 	}
 }
 
@@ -291,8 +291,8 @@ func UnsafeCastString(str string) []byte {
 	stringHeader := (*reflect.StringHeader)(unsafe.Pointer(&str))
 	sliceHeader := &reflect.SliceHeader{
 		Data: stringHeader.Data,
-		Cap: stringHeader.Len,
-		Len: stringHeader.Len,
+		Cap:  stringHeader.Len,
+		Len:  stringHeader.Len,
 	}
 	return *(*[]byte)(unsafe.Pointer(sliceHeader))
 }
