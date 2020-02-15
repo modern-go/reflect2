@@ -1,3 +1,5 @@
+// +build !gccgo
+
 package reflect2
 
 import (
