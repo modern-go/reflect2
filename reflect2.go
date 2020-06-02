@@ -3,6 +3,7 @@ package reflect2
 import (
 	"github.com/modern-go/concurrent"
 	"reflect"
+	"runtime"
 	"unsafe"
 )
 
