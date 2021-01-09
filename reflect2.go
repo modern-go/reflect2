@@ -1,9 +1,9 @@
 package reflect2
 
 import (
-	"github.com/modern-go/concurrent"
 	"reflect"
 	"runtime"
+	"sync"
 	"unsafe"
 )
 
@@ -131,13 +131,13 @@ var ConfigSafe = Config{UseSafeImplementation: true}.Froze()
 
 type frozenConfig struct {
 	useSafeImplementation bool
-	cache                 *concurrent.Map
+	cache                 *sync.Map
 }
 
 func (cfg Config) Froze() *frozenConfig {
 	return &frozenConfig{
 		useSafeImplementation: cfg.UseSafeImplementation,
-		cache: concurrent.NewMap(),
+		cache:                 new(sync.Map),
 	}
 }
 
