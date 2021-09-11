@@ -25,12 +25,6 @@ func mapassign(rtype unsafe.Pointer, m unsafe.Pointer, key unsafe.Pointer, val u
 //go:noescape
 func mapaccess(rtype unsafe.Pointer, m unsafe.Pointer, key unsafe.Pointer) (val unsafe.Pointer)
 
-// m escapes into the return value, but the caller of mapiterinit
-// doesn't let the return value escape.
-//go:noescape
-//go:linkname mapiterinit reflect.mapiterinit
-func mapiterinit(rtype unsafe.Pointer, m unsafe.Pointer, it *hiter)
-
 //go:noescape
 //go:linkname mapiternext reflect.mapiternext
 func mapiternext(it *hiter)
