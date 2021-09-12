@@ -68,3 +68,17 @@ func TypeByPackageName(pkgPath string, name string) Type {
 	}
 	return Type2(pkgTypes[name])
 }
+
+// TypesInPackage return types in the given package
+func TypesInPackage(pkgPath string) map[string]Type {
+	initOnce.Do(discoverTypes)
+	pkgTypes := packages[pkgPath]
+	if pkgTypes == nil {
+		return nil
+	}
+	type2 := make(map[string]Type, len(pkgTypes))
+	for name, type1 := range pkgTypes {
+		type2[name] = Type2(type1)
+	}
+	return type2
+}
