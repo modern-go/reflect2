@@ -57,8 +57,5 @@ func (type2 *UnsafeIFaceType) UnsafeIsNil(ptr unsafe.Pointer) bool {
 		return true
 	}
 	iface := (*iface)(ptr)
-	if iface.itab == nil {
-		return true
-	}
-	return false
+	return iface.itab == nil
 }
