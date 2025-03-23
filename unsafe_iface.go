@@ -53,12 +53,5 @@ func (type2 *UnsafeIFaceType) IsNil(obj interface{}) bool {
 }
 
 func (type2 *UnsafeIFaceType) UnsafeIsNil(ptr unsafe.Pointer) bool {
-	if ptr == nil {
-		return true
-	}
-	iface := (*iface)(ptr)
-	if iface.itab == nil {
-		return true
-	}
-	return false
+	return ptr == nil || (*iface)(ptr).itab == nil
 }
